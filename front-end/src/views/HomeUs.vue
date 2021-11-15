@@ -1,17 +1,17 @@
 <template>
   <div class="homeus">
-      <Userpage />
+      <UserPage />
       
   </div>
 </template>
 
 <script>
-import Userpage from '@/components/Userpage.vue'
+import UserPage from '@/components/UserPage.vue'
 
 export default {
   name: 'HomeUs',
   components: {
-    Header,
+    UserPage,
     
   }
 }

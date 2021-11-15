@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import auth from "../middleware/auth";
-import VueRouteMiddleware from "vue-route-middleware";
 
 const routes = [
   {
@@ -23,18 +21,24 @@ const routes = [
     name: "HomeUs",
 
     component: () => import("@/views/HomeUs.vue"),
-    beforeEnter: {
-      
-    },
+    auth : (_to, _from, next) => {
+      if (!localStorage.getItem('token')) {
+        next({ name: 'Home' });
+        return false
+      }
+  },
   },
   {
     path: "/useraccountpage",
     name: "UserAccountPage",
 
     component: () => import("@/views/UserAccountPage.vue"),
-    meta: {
-      middleware: auth,
-    },
+    auth : (_to, _from, next) => {
+      if (!localStorage.getItem('token')) {
+        next({ name: 'Home' });
+        return false
+      }
+  },
   },
 ];
 
