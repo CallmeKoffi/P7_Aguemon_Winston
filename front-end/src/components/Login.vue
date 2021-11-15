@@ -91,7 +91,8 @@ form label {
   font-size: 1.2rem;
 }
 button {
-  margin : 10px;
+  width: 40%;
+  margin : auto;
   height: 35px;
   border-radius: 40px;
   font-size: 1.2rem;
@@ -99,7 +100,7 @@ button {
   cursor: pointer;
 }
 button:hover {
-  background-color: rgb(117, 117, 117);
+  background-color: rgb(224, 75, 75);
   color: white;
 }
 </style>
