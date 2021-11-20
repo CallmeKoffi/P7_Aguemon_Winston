@@ -5,10 +5,10 @@ require('dotenv').config();
 
 //Inscription
 exports.register= (req, res, next) => {
-    db.query(`SELECT * FROM user WHERE email='${req.body.email}'`,
+    db.query(`SELECT * FROM user_groupomania.user WHERE email='${req.body.email}'`,
             (err, results, rows) => {
                 //Verification mail//
-                if (results > 0) {
+                if (results.length > 0) {
                     res.status(401).json({
                         message: 'Email non disponible.'
                     });
@@ -20,12 +20,13 @@ exports.register= (req, res, next) => {
                 bcrypt.hash(req.body.password, 10)
                 .then(cryptedPassword => {
                     //Add to BDD//
-                    db.query(`INSERT INTO user (nom, prenom, email, password ) VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${req.body.email}', '${cryptedPassword}' , 0)`,
-                        (err, results, fields) => {
+                    db.query(`INSERT INTO user_groupomania.user (nom, prenom, email, password ) VALUES ('${req.body.nom}', '${req.body.prenom}', '${req.body.email}', '${cryptedPassword}')`,
+                        (err, fields) => {
                             if (err) {
-                                console.log(err);
+                           
                                 return res.status(400).json("erreur");
                             }
+                          
                             return res.status(201).json({
                                 message: 'Votre compte a bien été crée !'
                             });
@@ -41,8 +42,8 @@ exports.register= (req, res, next) => {
 
 exports.login = (req, res, next) => {
     //Search users in BDD//
-    db.query(`SELECT * FROM user WHERE email='${req.body.email}'`,
-        (err, results, rows) => {
+    db.query(`SELECT * FROM user_groupomania.user WHERE email='${req.body.email}'`,
+        (err, results) => {
             //if users find// 
             if (results) {
                 //Password verification//
@@ -60,7 +61,7 @@ exports.login = (req, res, next) => {
                                 admin: results[0].admin,
                                 token: jwt.sign(
                                     { userId: results[0].id }, 
-                                    process.env.TOKEN, 
+                                    "my_secret_key", 
                                     { expiresIn: '8h' }
                                 )
                             });

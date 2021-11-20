@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import axios from "axios";
+
 import UserPage from "@/components/UserPage.vue"
 export default {
   name: "UserAccount",
@@ -28,7 +28,8 @@ export default {
   methods: {
     displayProfile() {
       const userId = localStorage.getItem('userId');
-      axios.get('http://localhost:4000/api/auth/profile/' + userId, {
+      fetch('http://localhost:3000/api/auth/profile/' + userId, {
+        method: 'GET',
         
         headers: {
                         'Content-Type': 'application/json',

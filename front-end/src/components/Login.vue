@@ -5,6 +5,7 @@
       <nav>
         <router-link to="/">Connexion </router-link>|<router-link to="/Register"> S'inscrire</router-link>
       </nav>
+      <p>{{ message }}</p>
       <form @submit.prevent = login()>
         <label for='login-mail'> Email : </label>
         <input id='login-mail' type='text' placeholder='Email' required>
@@ -16,35 +17,41 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
     name: 'Login',
+    data() {
+        return {
+            message: "",
+        };
+    },
     methods: {
         login(){
             const email = document.getElementById("login-mail").value;
             const password = document.getElementById("login-password").value;
             
-            axios.post(`http://localhost:4000/api/auth/login`,
-                {
-                    email,
-                    password
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+            fetch(`http://localhost:3000/api/users/login`,{
+                method: 'POST',
+                body: JSON.stringify({email,password}),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+                    
                 }
             )
             .then(res => {
+              
               if(res.status === 200) {
-                localStorage.setItem('prenom', res.data.prenom);
-                localStorage.setItem('nom', res.data.nom);
-                localStorage.setItem('userId', res.data.userId);
-                localStorage.setItem('token', res.data.token);
-                location.href = '/HomeUser';
+                console.log(res)
+                localStorage.setItem('prenom', res.body.prenom);
+                localStorage.setItem('nom', res.body.nom);
+                localStorage.setItem('userId', res.body.userId);
+                localStorage.setItem('token', res.body.token);
+                location.href = '/homeuser';
               }
             })
             .catch((error) => {
+              console.log(error)
                 if (error.response.status === 404) {
                     this.message = "Utilisateur inconnu.";
                 }

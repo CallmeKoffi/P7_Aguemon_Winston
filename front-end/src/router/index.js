@@ -25,12 +25,12 @@ const routes = [
     name: "HomeUs",
 
     component: HomeUs,
-    auth : (_to, _from, next) => {
+    /* auth : (_to, _from, next) => {
       if (!localStorage.getItem('token')) {
         next({ name: 'Home' });
         return false
       }
-  },
+  },*/
   },
   {
     path: "/useraccountpage",

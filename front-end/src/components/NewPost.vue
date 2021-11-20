@@ -21,10 +21,11 @@ export default {
             console.log(postContent);
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
-            axios.post(`http://localhost:3000/api/posts/`,
+            fetch(`http://localhost:3000/api/posts/`,
                 {
-                    userId,
-                    postContent
+                    method: "POST",
+                    body: JSON.stringify({userId, postContent})
+                    
                 },
                 {
                     headers: {
