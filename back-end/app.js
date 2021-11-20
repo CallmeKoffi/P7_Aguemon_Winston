@@ -13,7 +13,7 @@ const postRoutes = require('./routes/post');
 // Headers pour l'APP
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Vary', 'Origin');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -32,9 +32,9 @@ app.use(bodyParser.json());
 // Implantation express dans l'app
  app.use(express.json());
 // création route authentification
-// app.use('/api/auth', userRoutes);
+ app.use('/api/users', userRoutes);
 
 // création route sauces
-// app.use('/api/posts', postRoutes);
+ app.use('/api/posts', postRoutes);
 
 module.exports = app;

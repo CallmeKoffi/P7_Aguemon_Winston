@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-    <registerpage />
+    <registerPage />
   </div>
 </template>
 
@@ -8,8 +8,8 @@
 import registerPage from "@/components/registerPage.vue";
 
 export default {
-  Name: "register",
-  Components: {
+  name: "register",
+  components: {
     registerPage,
   },
 };

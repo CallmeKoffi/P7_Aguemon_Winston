@@ -15,7 +15,7 @@
         <input id="registerpage-firstname" type='text' placeholder="First name" required>
 
         <label for="registerpage-mail">Email :</label>
-        <input id="register-mail" type='text' placeholder="Email" required>
+        <input id="registerpage-mail" type='text' placeholder="Email" required>
 
         <label for="registerpage-password">Mot de passe :</label>
         <input id="registerpage-password" type='password' placeholder="Password" required>
@@ -46,7 +46,7 @@ export default {
             const passwordCheck = document.getElementById("registerpage-passwordcheck").value;
             const email = document.getElementById("registerpage-mail").value;
             if(password === passwordCheck){
-                fetch('http://localhost:4000/api/auth/register', {
+                fetch("http://localhost:3000/api/users/register", {
                 method: 'POST',
                 body: JSON.stringify({nom, prenom, password, email}),
                 headers: {

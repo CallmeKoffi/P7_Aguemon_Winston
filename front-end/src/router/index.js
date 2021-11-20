@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Register from "../views/Register.vue";
+import HomeUs from "../views/HomeUs.vue";
+
+
 
 const routes = [
   {
@@ -8,19 +12,19 @@ const routes = [
     component: Home,
   },
   {
-    path: "/Register",
+    path: "/register",
     name: "Register",
     // route level code-splitting
     // this generates a separate chunk (register.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import("@/views/Register.vue"),
+    component: Register,
   },
 
   {
-    path: "/Homeuser",
+    path: "/homeuser",
     name: "HomeUs",
 
-    component: () => import("@/views/HomeUs.vue"),
+    component: HomeUs,
     auth : (_to, _from, next) => {
       if (!localStorage.getItem('token')) {
         next({ name: 'Home' });

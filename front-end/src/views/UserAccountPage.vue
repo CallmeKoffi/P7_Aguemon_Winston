@@ -1,16 +1,15 @@
 <template>
   <div class="useraccountpage">
-      <Header />
+      <UserPage/>
       <h1>Hello, {{ user.prenom }} {{ user.nom }}</h1>
-    
-  </div>
+   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import UserPage from '@/components/UserPage.vue'
+import axios from "axios";
+import UserPage from "@/components/UserPage.vue"
 export default {
-  Name: 'UserAccount',
+  name: "UserAccount",
   
   components: { 
     UserPage, 

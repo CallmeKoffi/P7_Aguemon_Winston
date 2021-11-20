@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const userCtrl = require('../controllers/user')
-const Jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
 
-router.post('/Register', userCtrl.signup);
-router.post('/', userCtrl.login);
+const userCtrl = require('../controllers/user');
+
+router.post('/register', userCtrl.register);
+router.post('/login', userCtrl.login);
+router.get('/profile/:id',auth, userCtrl.getUserProfile);
 
 module.exports = router;
+
