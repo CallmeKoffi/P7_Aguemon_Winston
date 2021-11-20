@@ -20,7 +20,7 @@ exports.register= (req, res, next) => {
                 bcrypt.hash(req.body.password, 10)
                 .then(cryptedPassword => {
                     //Add to BDD//
-                    db.query(`INSERT INTO user VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${cryptedPassword}', '${req.body.email}' , 0)`,
+                    db.query(`INSERT INTO user (nom, prenom, email, password ) VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${req.body.email}', '${cryptedPassword}' , 0)`,
                         (err, results, fields) => {
                             if (err) {
                                 console.log(err);
