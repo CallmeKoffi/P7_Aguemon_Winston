@@ -42,7 +42,7 @@ export default {
             .then(res => {
               
               if(res.status === 200) {
-                console.log(res)
+                
                 localStorage.setItem('prenom', res.body.prenom);
                 localStorage.setItem('nom', res.body.nom);
                 localStorage.setItem('userId', res.body.userId);
@@ -51,7 +51,7 @@ export default {
               }
             })
             .catch((error) => {
-              console.log(error)
+              
                 if (error.response.status === 404) {
                     this.message = "Utilisateur inconnu.";
                 }

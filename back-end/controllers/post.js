@@ -2,7 +2,7 @@ const Sqldb = require('../models/sqlDataBase');
 
 // Afficher tout les post //
 exports.getAllPost = (req, res, next) => {
-    Sqldb.query('SELECT user.nom, user.prenom, post.id, post.userId, post.title, post.content, post.date AS date FROM user INNER JOIN post ON user.id = post.userId ORDER BY date DESC', (error, result, field) => {
+    Sqldb.query('SELECT user_groupomania.user.user.nom, user_groupomania.user.prenom, user_groupomania.post.id, user_groupomania.post.userId, user_groupomania.post.title, user_groupomania.post.content, user_groupomania.post.date AS date FROM user_groupomania.user INNER JOIN user_groupomania.post ON user_groupomania.user.id = user_groupomania.post.userId ORDER BY date DESC', (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -11,7 +11,7 @@ exports.getAllPost = (req, res, next) => {
 };
 // Créer un post //
 exports.newPost = (req, res, next) => {
-    Sqldbdb.query(`INSERT INTO post VALUES (NULL, '${req.body.userId}', NOW(), '${req.body.content}')`, (error, result, field) => {
+    Sqldb.query(`INSERT INTO user_groupomania.post VALUES ('${req.body.userId}', '${req.body.content}', NOW() )`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -22,7 +22,7 @@ exports.newPost = (req, res, next) => {
 };
 // Afficher un post //
 exports.getOnePost = (req, res, next) => {
-    Sqldbdb.query(`SELECT * FROM post WHERE post.id = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`SELECT * FROM user_groupomania.post WHERE post.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -31,7 +31,7 @@ exports.getOnePost = (req, res, next) => {
 };
 // Efacer un post//
 exports.deleteOnePost = (req, res, next) => {
-    Sqldbdb.query(`DELETE FROM post WHERE post.id = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`DELETE FROM user_groupomania.post WHERE post.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -40,7 +40,7 @@ exports.deleteOnePost = (req, res, next) => {
 };
 // Modifier le post utilisateur // 
 exports.modifyOnePost = (req, res, next) => {
-    Sqldbdb.query(`UPDATE post SET title = '${req.body.title}', content = '${req.body.content}' WHERE post.id = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`UPDATE user_groupomania.post SET content = '${req.body.content}' WHERE post.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -49,7 +49,7 @@ exports.modifyOnePost = (req, res, next) => {
 };
 // Afficher les posts d'un utilisateur //
 exports.getUserPosts = (req, res, next) => {
-    Sqldbdb.query(`SELECT * FROM post WHERE post.userId = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`SELECT * FROM user_groupomania.post WHERE post.userId = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -59,7 +59,7 @@ exports.getUserPosts = (req, res, next) => {
 
 // Création de nouveaux com //
 exports.newComment = (req, res, next) => {
-    Sqldbdb.query(`INSERT INTO comments VALUES ('${req.body.userId}', '${req.params.id}', NOW(), '${req.body.content}')`, (error, result, field) => {
+    Sqldb.query(`INSERT INTO user_groupomania.comments VALUES ('${req.body.userId}', '${req.params.id}', '${req.body.content}', NOW())`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -69,7 +69,7 @@ exports.newComment = (req, res, next) => {
 
 // Affichage des com//
 exports.getAllComments = (req, res, next) => {
-    Sqldbdb.query(`SELECT user.id, user.nom, user.prenom, comments.id, comments.content, comments.userId, comments.date FROM user INNER JOIN comments ON user.id = comments.userId WHERE comments.postId = ${req.params.id} ORDER BY comments.date DESC`,
+    Sqldb.query(`SELECT user.id, user.nom, user.prenom, comments.id, comments.content, comments.userId, comments.date FROM user_groupomania.user INNER JOIN user_groupomania.comments ON user.id = comments.userId WHERE comments.postId = ${req.params.id} ORDER BY comments.date DESC`,
         (error, result, field) => {
             if (error) {
                 return res.status(400).json({ error });
@@ -79,7 +79,7 @@ exports.getAllComments = (req, res, next) => {
 };
 // Suppression des com //
 exports.deleteComment = (req, res, next) => {
-    Sqldbdb.query(`DELETE FROM comments WHERE comments.id = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`DELETE FROM user_groupomania.comment WHERE comment.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }

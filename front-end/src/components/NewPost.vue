@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent= sendNewPost() class='newpost'>
-      <label class="titlePost">Echangez ici ==></label>
+      <label class="titlePost">Postez ici ==></label>
       <input  id=postcontent type="text" placeholder="Que voulez vous partager?">
       <button id="btnSend" type="submit">Envoyer</button>
   </form>
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
     name: 'NewPost',
     data() {
@@ -37,6 +37,7 @@ export default {
                 .then(res => {
                     if(res.status === 201)
                     console.log(res);
+                    location.href= '/';
                 })
             )
         }
@@ -69,4 +70,4 @@ export default {
         font-size: 2rem;
         width: 20%;
     }
-</style>
+</style>*/

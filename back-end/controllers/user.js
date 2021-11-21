@@ -76,7 +76,7 @@ exports.login = (req, res, next) => {
 
 exports.getUserProfile = (req, res, next) => {
     console.log('getUserProfile', req.params.id)
-    db.query(`SELECT * FROM user WHERE id='${req.params.id}'`,
+    db.query(`SELECT * FROM user_groupomania.user WHERE id='${req.params.id}'`,
         (error, result, rows) => {
             console.log('error', error)
             console.log('result', result)

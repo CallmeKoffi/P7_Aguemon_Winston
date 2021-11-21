@@ -28,7 +28,7 @@ export default {
   methods: {
     displayProfile() {
       const userId = localStorage.getItem('userId');
-      fetch('http://localhost:3000/api/auth/profile/' + userId, {
+      fetch('http://localhost:3000/api/users/profile/' + userId, {
         method: 'GET',
         
         headers: {
@@ -37,7 +37,7 @@ export default {
                     }
       })
       .then(res => {
-        this.user = res.data[0];
+        this.user = res.body[0];
       })
     }
   }

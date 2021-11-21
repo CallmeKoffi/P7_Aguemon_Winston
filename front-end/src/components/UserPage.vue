@@ -1,6 +1,6 @@
 <template>
     <div class='userpage'>
-        <router-link to='/HomeUs'>
+        <router-link to='/homeuser'>
             <img class="logoHomeuser" alt='groupomania logo' src='../assets/icon.png'>
         </router-link>
         <nav>
@@ -9,6 +9,8 @@
             </router-link>
             <div class="disconnect" @click = disconnect()>Se déconnecter</div>
         </nav>
+       
+        
     </div>
 </template>
 
@@ -24,6 +26,8 @@ export default {
     }
 
 }
+
+
 </script>
 
 <style>
@@ -49,4 +53,8 @@ nav {
 .disconnect:hover, .account:hover {
     font-weight: bold;
 }
+img{
+    width: 30%;
+}
+
 </style>

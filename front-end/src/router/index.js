@@ -44,6 +44,15 @@ const routes = [
       }
   },
   },
+
+  {
+    path: "/allpost",
+    name: "Allpost",
+
+    component: () => import("@/views/AllPostPage.vue"),
+    
+  },
+  
 ];
 
 const router = createRouter({
