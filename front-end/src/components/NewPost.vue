@@ -1,9 +1,15 @@
 <template>
-  <form @submit.prevent= sendNewPost() class='newpost'>
+<div>
+    
+
+    <form @submit= "e=> e.preventDefault()" class='newpost'>
       <label class="titlePost">Postez ici ==></label>
-      <input  id=postcontent type="text" placeholder="Que voulez vous partager?">
-      <button id="btnSend" type="submit">Envoyer</button>
+      <input  v-model="postContent" id="postcontent" type="text" placeholder="Que voulez vous partager?">
+      <button id="btnSend" type="submit" @click= "sendNewPost()" >Envoyer</button>
   </form>
+</div>
+  
+
 </template>
 
 <script>
@@ -17,29 +23,30 @@ export default {
     },
     methods: {
         sendNewPost() {
-            const postContent = document.getElementById("postcontent").value;
-            console.log(postContent);
+            
+            console.log(this.postContent);
             const userId = localStorage.getItem('userId');
             const token = localStorage.getItem('token');
-            fetch(`http://localhost:3000/api/posts/`,
-                {
+            const content = this.postContent
+            fetch(`http://localhost:3000/api/posts/`,{
+                
                     method: "POST",
-                    body: JSON.stringify({userId, postContent})
+                    body: JSON.stringify({ content,userId})
                     
-                },
-                {
+                ,
+                
                     headers: {
                         'content-type' : 'application/json',
-                        'Authorization': `Bearer ` + token,
+                        'Authorization': `Bearer `+ token,
                     },
-                }
-
+                
+                })
                 .then(res => {
                     if(res.status === 201)
                     console.log(res);
-                    location.href= '/';
+                    location.href= '/allpost';
                 })
-            )
+            
         }
     }
 }

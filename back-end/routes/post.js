@@ -4,8 +4,8 @@ const auth = require('../middleware/auth');
 const userPostCtrl = require('../controllers/post');
 
 //Posts//
-router.get('/', auth, userPostCtrl.getAllPost);
-router.post('/', auth, userPostCtrl.newPost);
+router.get('/', userPostCtrl.getAllPost);
+router.post('/', userPostCtrl.newPost);
 router.get('/:id', auth, userPostCtrl.getOnePost);
 router.delete('/:id', auth, userPostCtrl.deleteOnePost);
 router.put('/:id', auth, userPostCtrl.modifyOnePost);

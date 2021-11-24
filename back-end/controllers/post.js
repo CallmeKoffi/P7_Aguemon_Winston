@@ -2,16 +2,19 @@ const Sqldb = require('../models/sqlDataBase');
 
 // Afficher tout les post //
 exports.getAllPost = (req, res, next) => {
-    Sqldb.query('SELECT user_groupomania.user.user.nom, user_groupomania.user.prenom, user_groupomania.post.id, user_groupomania.post.userId, user_groupomania.post.title, user_groupomania.post.content, user_groupomania.post.date AS date FROM user_groupomania.user INNER JOIN user_groupomania.post ON user_groupomania.user.id = user_groupomania.post.userId ORDER BY date DESC', (error, result, field) => {
+    Sqldb.query('SELECT * FROM user_groupomania.post ORDER BY date DESC', 
+    (error, results) => {
         if (error) {
             return res.status(400).json({ error });
         }
-        return res.status(200).json(result);
+        console.log(results)
+        return res.status(200).json(results);
     });
 };
 // Créer un post //
 exports.newPost = (req, res, next) => {
-    Sqldb.query(`INSERT INTO user_groupomania.post VALUES ('${req.body.userId}', '${req.body.content}', NOW() )`, (error, result, field) => {
+    Sqldb.query(`INSERT INTO user_groupomania.post (content, date, userID) VALUES ( '${req.body.content}', NOW(), ${req.body.userId})`,
+    (error, resut) => {
         if (error) {
             return res.status(400).json({ error });
         }

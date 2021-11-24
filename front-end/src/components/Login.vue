@@ -38,17 +38,17 @@ export default {
                 }
                     
                 }
-            )
-            .then(res => {
-              
-              if(res.status === 200) {
-                
-                localStorage.setItem('prenom', res.body.prenom);
-                localStorage.setItem('nom', res.body.nom);
-                localStorage.setItem('userId', res.body.userId);
-                localStorage.setItem('token', res.body.token);
-                location.href = '/homeuser';
-              }
+            ).then(res => res.json())
+            .then(data =>{
+             
+                 // add to LS + redirection
+                                                
+                localStorage.setItem('prenom', data.prenom)
+                localStorage.setItem('nom', data.nom)
+                localStorage.setItem('userId', data.userId)
+                localStorage.setItem('token', data.token)
+                location.href = '/allpost'
+            
             })
             .catch((error) => {
               

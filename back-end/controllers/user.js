@@ -21,6 +21,7 @@ exports.register= (req, res, next) => {
                 .then(cryptedPassword => {
                     //Add to BDD//
                     db.query(`INSERT INTO user_groupomania.user (nom, prenom, email, password ) VALUES ('${req.body.nom}', '${req.body.prenom}', '${req.body.email}', '${cryptedPassword}')`,
+                    
                         (err, fields) => {
                             if (err) {
                            
@@ -32,6 +33,7 @@ exports.register= (req, res, next) => {
                             });
                         }
                     );
+                  
                 })
                 .catch(error => res.status(500).json({error})
                 
@@ -44,6 +46,7 @@ exports.login = (req, res, next) => {
     //Search users in BDD//
     db.query(`SELECT * FROM user_groupomania.user WHERE email='${req.body.email}'`,
         (err, results) => {
+            console.log(req.body,results)
             //if users find// 
             if (results) {
                 //Password verification//
@@ -63,8 +66,10 @@ exports.login = (req, res, next) => {
                                     { userId: results[0].id }, 
                                     "my_secret_key", 
                                     { expiresIn: '8h' }
-                                )
+                                ),
+                                
                             });
+                            
                         }
                     });
             } else {

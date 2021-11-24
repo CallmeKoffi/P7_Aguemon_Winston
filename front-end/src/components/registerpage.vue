@@ -68,8 +68,8 @@ export default {
             else if( password != passwordCheck){
                 this.message = "Vérifier le mot de passe";
             }
-            
-        }
+             
+        }                 
     }
     }
 </script>
