@@ -1,10 +1,10 @@
 <template>
     <div class='userpage'>
-        <router-link to='/homeuser'>
-            <img class="logoHomeuser" alt='groupomania logo' src='../assets/icon.png'>
-        </router-link>
+        <router-link to='/allpost'>
+            <img class="logoHomeuser" alt='groupomania logo' src="../assets/icon-left-font-monochrome-black.png">
+        </router-link> 
         <nav>
-            <router-link to='/UserAccountPage'>
+            <router-link to='/allpost'>
                 <div class="account">Mon compte</div>
             </router-link>
             <div class="disconnect" @click = disconnect()>Se déconnecter</div>
@@ -31,15 +31,21 @@ export default {
 </script>
 
 <style>
+.userpage{
+    width: 100%;
+}
+
+
 .header {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
 }
 .logoHeader {
-    width: 60%;
-    position: relative;
-    right: 220px;
+    width: 200px;
+    display: block;
+    margin: auto;
+    
 }
 nav {
     font-size: 1.4rem;

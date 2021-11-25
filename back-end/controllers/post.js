@@ -2,7 +2,7 @@ const Sqldb = require('../models/sqlDataBase');
 
 // Afficher tout les post //
 exports.getAllPost = (req, res, next) => {
-    Sqldb.query('SELECT * FROM user_groupomania.post ORDER BY date DESC', 
+    Sqldb.query('SELECT p.*, u.nom, u.prenom, u.imgURL FROM user_groupomania.post p INNER JOIN user_groupomania.user u  ON u.id = p.userID ORDER BY date DESC', 
     (error, results) => {
         if (error) {
             return res.status(400).json({ error });

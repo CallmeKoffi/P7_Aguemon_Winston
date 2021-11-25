@@ -20,6 +20,7 @@ export default {
       user:""
     }
   },
+  
   created() {
     this.displayProfile();
   },
@@ -36,6 +37,7 @@ export default {
                         'Authorization': `Bearer ` + localStorage.getItem('token')
                     }
       })
+      .then(res => res.json())
       .then(res => {
         this.user = res.body[0];
       })

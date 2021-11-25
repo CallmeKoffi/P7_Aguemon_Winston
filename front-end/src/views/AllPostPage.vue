@@ -53,6 +53,7 @@ export default {
             .then(posts => {
                 this.posts = posts
                 })
-  }
+  },
+ 
 };
 </script>
