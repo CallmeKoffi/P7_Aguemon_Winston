@@ -52,6 +52,14 @@ const routes = [
     component: () => import("@/views/AllPostPage.vue"),
     
   },
+
+  {
+    path: "/postpage",
+    name: "PostPage",
+
+    component: () => import("@/views/PostPage.vue"),
+    
+  },
   
 ];
 
