@@ -8,7 +8,7 @@
           class="card_profile-picture"
         />
         <div class="card_profile-name">{{ post.nom }} {{ post.prenom }} |</div>
-        <div class="card_profile-date">posté le :{{ post.date }}:</div>
+        <div class="card_profile-date">posté le : {{ post.date }}</div>
       </div>
       <div class="card_sm">
         <div class="card_sm-content">{{ post.content }}</div>

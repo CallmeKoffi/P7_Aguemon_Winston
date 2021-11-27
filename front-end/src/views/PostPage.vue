@@ -62,6 +62,9 @@ export default {
             .then(post => {
                 this.post = post[0]
                 })
+            .then(comment =>{
+              this.comment = comment[0]
+            })
   },
   method:{
       deletePost(){
