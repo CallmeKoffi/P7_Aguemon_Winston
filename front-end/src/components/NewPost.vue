@@ -10,10 +10,10 @@
       />
       <label> </label>
       <input
-        
+      name="file"
         type="file"
         id="file"
-        @click="handleFileUpload()"
+        @change="handleFileUpload"
       />
     </form>
     <button id="btnSend" type="submit" @click="sendNewPost()">Envoyer</button>
@@ -37,21 +37,23 @@ export default {
 
     sendNewPost() {
       console.log(this.postContent);
+       console.log(this.file);
       let formData = new FormData();
       formData.append('file', this.file);
-      console.log(formData);
+      formData.append('content',  this.postContent);
+      formData.append('userID', localStorage.getItem('userId') );
 
-      const userId = localStorage.getItem('userId');
+      //const userId = localStorage.getItem('userId');
       const token = localStorage.getItem('token');
-      const content = this.postContent;
-      const imgPost = this.postContent;
+      //const content = this.postContent;
+      //const imgPost = this.postContent;
       
-      fetch(`http://localhost:3000/api/posts/`,formData, {
+      fetch(`http://localhost:3000/api/posts/`, {
         method: 'POST',
-        body: JSON.stringify({ content, userId, imgPost }),
+        body: formData,
 
         headers: {
-          'content-type': 'application/json, multipart/form-data',
+          //'content-type': 'multipart/form-data',
           Authorization: `Bearer ` + token,
         },
       }).then((res) => {
@@ -59,15 +61,16 @@ export default {
         //location.href = '/allpost';
       });
     },
-  },
-  handleFileUpload(event){
+  
+   handleFileUpload(event){
+    console.log(event.target.files)
          this.file = event.target.files[0];
       },
-  disconnect() {
+   disconnect() {
             localStorage.removeItem('user');
             location.href="/";
         }
-
+},
 };
 </script>
 

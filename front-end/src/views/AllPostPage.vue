@@ -1,5 +1,5 @@
 <template>
-    <div id="postPage">
+ <div id="postPage">
      <img alt="Groupomania Logo" src="../assets/icon-left-font-monochrome-black.png">
     <p>Bienvenue dans votre réseau d'entreprise</p>
     <nav>
@@ -14,7 +14,7 @@
            <p v-if="posts.length == 0">Aucun posts de disponible</p>
         </div>
     </div>
-</div>
+ </div>
 </template>
 
 

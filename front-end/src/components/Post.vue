@@ -12,28 +12,31 @@
       </div>
       <div class="card_sm">
         <div class="card_sm-content">{{ post.content }}</div>
-        <img class="card_sm-postImg">{{ post.imgPost }}</div>
+        <img class="card_sm-postImg" :src="post.imgPost"></div>
       </div>
 
-    <button id="btn_comment" type="button" @click="goToPostPage()">
-      Commentez
-    </button>
+    
+    <router-link v-if="displayBtnComment" :to="{ name: 'PostPage', params: { id: post.id } }">Commentez</router-link>
   </div>
 </template>
 
 <script>
 export default {
   data() {},
-  props: ['post'],
-  methods: {
-    goToPostPage() {
-      window.location.href = '/postpage';
+  props: {
+    post : {
+      type: Object
     },
+    displayBtnComment: {
+      type : Boolean,
+      default : true
+    }
   },
+  
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .card {
   background-color: rgb(227, 233, 245);
   border-radius: 20px;
@@ -59,6 +62,11 @@ export default {
   .card_sm-content {
     font: 2em sans-serif;
     font-weight: bold;
+  }
+  .card_sm-postImg {
+    width: 50%;
+    height: 50%;
+    border-radius: 40%;
   }
 
   form {

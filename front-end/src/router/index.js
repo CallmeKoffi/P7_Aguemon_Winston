@@ -54,7 +54,7 @@ const routes = [
   },
 
   {
-    path: "/postpage",
+    path: "/postpage/:id",
     name: "PostPage",
 
     component: () => import("@/views/PostPage.vue"),

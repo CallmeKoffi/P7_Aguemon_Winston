@@ -7,13 +7,15 @@ exports.getAllPost = (req, res, next) => {
         if (error) {
             return res.status(400).json({ error });
         }
-        console.log(results)
+        
         return res.status(200).json(results);
     });
 };
 // Créer un post //
 exports.newPost = (req, res, next) => {
-    Sqldb.query(`INSERT INTO user_groupomania.post (content, date, userID) VALUES ( '${req.body.content}', NOW(), ${req.body.userId})`,
+   
+    const imgUrl = 'file' in req ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null;
+    Sqldb.query(`INSERT INTO user_groupomania.post (content, date, userID, imgPost) VALUES ( '${req.body.content}', DATE(), ${req.body.userID}, '${imgUrl}')`,
     (error, resut) => {
         if (error) {
             return res.status(400).json({ error });
@@ -52,7 +54,7 @@ exports.modifyOnePost = (req, res, next) => {
 };
 // Afficher les posts d'un utilisateur //
 exports.getUserPosts = (req, res, next) => {
-    Sqldb.query(`SELECT * FROM user_groupomania.post WHERE post.userId = ${req.params.id}`, (error, result, field) => {
+    Sqldb.query(`SELECT * FROM user_groupomania.post WHERE post.userID = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -62,7 +64,7 @@ exports.getUserPosts = (req, res, next) => {
 
 // Création de nouveaux com //
 exports.newComment = (req, res, next) => {
-    Sqldb.query(`INSERT INTO user_groupomania.comments VALUES ('${req.body.userId}', '${req.params.id}', '${req.body.content}', NOW())`, (error, result, field) => {
+    Sqldb.query(`INSERT INTO user_groupomania.comment VALUES ('${req.body.userId}', '${req.params.id}', '${req.body.content}', DATE())`, (error, result, field) => {
         if (error) {
             return res.status(400).json({ error });
         }
@@ -72,7 +74,7 @@ exports.newComment = (req, res, next) => {
 
 // Affichage des com//
 exports.getAllComments = (req, res, next) => {
-    Sqldb.query(`SELECT user.id, user.nom, user.prenom, comments.id, comments.content, comments.userId, comments.date FROM user_groupomania.user INNER JOIN user_groupomania.comments ON user.id = comments.userId WHERE comments.postId = ${req.params.id} ORDER BY comments.date DESC`,
+    Sqldb.query(`SELECT user.id, user.nom, user.prenom, comment.id, comment.content, comment.userID, comment.date FROM user_groupomania.user INNER JOIN user_groupomania.comment ON user.id = comment.userID WHERE comment.postID = ${req.params.id} ORDER BY comment.date DESC`,
         (error, result, field) => {
             if (error) {
                 return res.status(400).json({ error });
