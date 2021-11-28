@@ -4,10 +4,10 @@ const auth = require('../middleware/auth');
 
 const userCtrl = require('../controllers/user');
 
-router.post('/register',auth, userCtrl.register);
+router.post('/register', userCtrl.register);
 router.post('/login',userCtrl.login);
-router.get('/profile/:id',auth, userCtrl.getUserProfile);
-router.get('/profile/:id',auth, userCtrl.deleteUserProfile)
+router.get('/profile/:id', userCtrl.getUserProfile);
+router.delete('/profile/:id/delete', userCtrl.deleteUserProfile)
 
 module.exports = router;
 

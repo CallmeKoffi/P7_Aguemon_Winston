@@ -35,16 +35,19 @@ export default {
          deleteAccount() {
     
 
-    const userId = JSON.parse(sessionStorage.getItem("userid"));
+    const userId =sessionStorage.getItem("userId");
     console.log(userId);
-    fetch(`http://localhost:3000/api/profile/:id/${userId}`,{
-        method: "GET",
+    fetch(`http://localhost:3000/api/users/profile/${userId}/delete`,{
+        method: "DELETE",
         
-        headers: {
-                    'Content-type': 'application/json'
-                } 
+
+    }).then((res)=> {
+        console.log(res)
+         //sessionStorage.clear();
+    // location.href="/register";
+         
     })
-    sessionStorage.clear();
+   
     //location.href="/Register";
     
   }

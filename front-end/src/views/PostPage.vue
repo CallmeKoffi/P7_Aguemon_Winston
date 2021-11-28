@@ -7,8 +7,8 @@
     </nav>
 <div>
  <Post :post="post" :displayBtnComment="false"/> 
- {{post.userID}}
- <button class="btn-post" v-if="isOwner()==true" @click="deletePost">Supprimer le post</button>  
+ 
+ <button class="btn-post" v-if="isOwner(post.userID)" @click="deletePost">Supprimer le post</button>  
     
 </div>
 
@@ -54,6 +54,12 @@ export default {
     Post,
     Comment,
   },
+  computed: {
+    /*isOwner(){
+              console.log(this.post.userId,sessionStorage.getItem('userId'))
+              return this.post.userId === sessionStorage.getItem('userId');
+            }*/
+  },
   
   beforeMount: function(){
        
@@ -98,11 +104,11 @@ export default {
         })
         .then(res => res.json)
         .then(data => console.log(data))
-
+         
       },
        isOwner(userID){
               console.log(userID,sessionStorage.getItem('userId'))
-              return userID === sessionStorage.getItem('userId');
+              return userID == sessionStorage.getItem('userId');
             }
   }
  

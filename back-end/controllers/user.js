@@ -6,7 +6,7 @@ require('dotenv').config();
 //Inscription
 exports.register= (req, res, next) => {
     db.query(`SELECT * FROM user_groupomania.user WHERE email='${req.body.email}'`,
-            (err, results, rows) => {
+            (err, results) => {
                 //Verification mail//
                 if (results.length > 0) {
                     res.status(401).json({
@@ -25,7 +25,7 @@ exports.register= (req, res, next) => {
                         (err, fields) => {
                             if (err) {
                            
-                                return res.status(400).json("erreur");
+                                return res.status(400).json(err);
                             }
                           
                             return res.status(201).json({
@@ -44,7 +44,8 @@ exports.register= (req, res, next) => {
 
 exports.login = (req, res, next) => {
     //Search users in BDD//
-    db.query(`SELECT * FROM user_groupomania.user WHERE email='${req.body.email}'`,
+    db.query('SELECT * FROM user_groupomania.user WHERE email=?',
+    [req.body.email],
         (err, results) => {
             console.log(req.body,results)
             //if users find// 
@@ -96,9 +97,9 @@ exports.getUserProfile = (req, res, next) => {
 
 exports.deleteUserProfile = (req,res,next)=>{
     //commande mysql
-    console.log(req);
-    db.query( `DELETE * FROM user_groupomania.user WHERE id='${req.params.id}'`,
-    (error, result, rows) => {
+    console.log("Delete",req);
+    db.query( `DELETE FROM user_groupomania.user WHERE id=${req.params.id}`,
+    (error, result) => {
         if (error) {
             return res.status(400).json({ error });
         }

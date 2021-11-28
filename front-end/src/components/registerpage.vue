@@ -60,9 +60,9 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    if (error.response.status === 401) {
+                    console.log(error)
                         this.message = "Email non disponible.";
-                    }  
+                   
                 });
             }
             else if( password != passwordCheck){

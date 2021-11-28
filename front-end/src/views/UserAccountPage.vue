@@ -1,7 +1,7 @@
 <template>
   <div class="useraccountpage">
       <UserPage/>
-      <h1>Hello, {{ user.prenom }} {{ user.nom }}</h1>
+      <h1>Hello,{{ user.nom }} {{ user.prenom }} </h1>
    </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
       })
       .then(res => res.json())
       .then(res => {
-        this.user = res.body[0];
+        this.user = res.body;
       })
     }
   }
