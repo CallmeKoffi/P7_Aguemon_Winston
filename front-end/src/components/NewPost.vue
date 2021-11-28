@@ -10,7 +10,7 @@
       />
       <label> </label>
       <input
-      name="file"
+        name="file"
         type="file"
         id="file"
         @change="handleFileUpload"
@@ -41,10 +41,10 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       formData.append('content',  this.postContent);
-      formData.append('userID', localStorage.getItem('userId') );
+      formData.append('userID', sessionStorage.getItem('userId') );
 
-      //const userId = localStorage.getItem('userId');
-      const token = localStorage.getItem('token');
+      //const userId = sessionStorage.getItem('userId');
+      const token = sessionStorage.getItem('token');
       //const content = this.postContent;
       //const imgPost = this.postContent;
       
@@ -67,7 +67,7 @@ export default {
          this.file = event.target.files[0];
       },
    disconnect() {
-            localStorage.removeItem('user');
+            sessionStorage.removeItem('user');
             location.href="/";
         }
 },

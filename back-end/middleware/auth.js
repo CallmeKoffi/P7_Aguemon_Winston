@@ -5,9 +5,9 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     console.log(req)
-    const decodedToken = Jwt.verify(token,process.env.SECRET_TOKEN);
+    const decodedToken = Jwt.verify(token,"my_secret_key");
     const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
+    if (req.body.userId !== userId) {
       throw 'Invalid user ID';
     } else {
       next();

@@ -6,7 +6,9 @@
         <router-link to="/allpost">Home</router-link>
     </nav>
 <div>
- <Post :post="post" :displayBtnComment="false"/>   
+ <Post :post="post" :displayBtnComment="false"/> 
+ {{post.userID}}
+ <button class="btn-post" v-if="isOwner()==true" @click="deletePost">Supprimer le post</button>  
     
 </div>
 
@@ -23,7 +25,7 @@
 
 <Comment v-for="comment in comments" :key="comment.id" :comment="comment"/>
 <p v-if="comments.length == 0">Aucun commentaire de disponible</p>
-<button class="btn-post" @click="deletePost()">Supprimer</button>
+
 </div>
 
 
@@ -44,19 +46,15 @@ export default {
               type: "Object"
           },
          comments:{
-            type: "Object",
-            default: [
-                {id:'id1',content: "contenu 1",date: "2021-12-25 00:00:00", userId: 'idUser1', prenom: "prenom1"},
-                 {id:'id2',content: "contenu 1",date: "2021-12-25 00:00:00", userId: 'idUser1', prenom: 'prenom1'},
-                  {id:'id3',content: "contenu 1",date: "2021-12-25 00:00:00", userId: 'idUser1', prenom: 'prenom1'}
-            ]
-          }
-          }
+            type: "Object"
+          },
+      }
     },
   components: {
     Post,
     Comment,
   },
+  
   beforeMount: function(){
        
       fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }`,{
@@ -66,6 +64,7 @@ export default {
             .then(res => res.json())
             .then(post => {
                 this.post = post[0];
+          
                 fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comments`,{
                   method: 'GET'
                 }).then(res => res.json())
@@ -75,11 +74,11 @@ export default {
             })
           
   },
-  method:{
+  methods:{
         sendComment(){
-            const content = document.getElementById("commentcontent");
-            const userId = document.getElementById("userId").value;
-          fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comments`,{
+            const content = document.getElementById("commentcontent").value;
+            const userId = sessionStorage.getItem('userId');
+          fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comment/`,{
                 method: 'POST',
                 body: JSON.stringify({content,userId}),
                 headers: {
@@ -88,7 +87,23 @@ export default {
                     
                 }
             ).then(res => res.json())
-      }
+      },
+      deletePost(){
+        
+        fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }`,{
+
+          method:'DELETE'
+          
+
+        })
+        .then(res => res.json)
+        .then(data => console.log(data))
+
+      },
+       isOwner(userID){
+              console.log(userID,sessionStorage.getItem('userId'))
+              return userID === sessionStorage.getItem('userId');
+            }
   }
  
 };

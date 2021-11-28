@@ -29,21 +29,22 @@ export default {
 
     methods: {
         disconnect() {
-            localStorage.removeItem('user');
+            sessionStorage.removeItem('user');
             location.href="/";
         },
          deleteAccount() {
     
 
-    const userId = JSON.parse(localStorage.getItem("user")).userId;
+    const userId = JSON.parse(sessionStorage.getItem("userid"));
+    console.log(userId);
     fetch(`http://localhost:3000/api/profile/:id/${userId}`,{
         method: "GET",
-        body: JSON.stringify({userId}),
+        
         headers: {
                     'Content-type': 'application/json'
                 } 
     })
-    localStorage.clear();
+    sessionStorage.clear();
     //location.href="/Register";
     
   }

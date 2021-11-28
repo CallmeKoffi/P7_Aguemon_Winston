@@ -28,13 +28,13 @@ export default {
   
   methods: {
     displayProfile() {
-      const userId = localStorage.getItem('userId');
+      const userId = sessionStorage.getItem('userId');
       fetch('http://localhost:3000/api/users/profile/' + userId, {
         method: 'GET',
         
         headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ` + localStorage.getItem('token')
+                        'Authorization': `Bearer ` + sessionStorage.getItem('token')
                     }
       })
       .then(res => res.json())

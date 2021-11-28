@@ -26,7 +26,7 @@ const routes = [
 
     component: HomeUs,
     /* auth : (_to, _from, next) => {
-      if (!localStorage.getItem('token')) {
+      if (!sessionStorage.getItem('token')) {
         next({ name: 'Home' });
         return false
       }
@@ -38,7 +38,7 @@ const routes = [
 
     component: () => import("@/views/UserAccountPage.vue"),
     auth : (_to, _from, next) => {
-      if (!localStorage.getItem('token')) {
+      if (!sessionStorage.getItem('token')) {
         next({ name: 'Home' });
         return false
       }

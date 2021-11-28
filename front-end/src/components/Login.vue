@@ -40,13 +40,13 @@ export default {
                 }
             ).then(res => res.json())
             .then(data =>{
-             
+              console.log(data)
                  // add to LS + redirection
                                                 
-                localStorage.setItem('prenom', data.prenom)
-                localStorage.setItem('nom', data.nom)
-                localStorage.setItem('userId', data.userId)
-                localStorage.setItem('token', data.token)
+                sessionStorage.setItem('prenom', data.prenom)
+                sessionStorage.setItem('nom', data.nom)
+                sessionStorage.setItem('userId', data.userId)
+                sessionStorage.setItem('token', data.token)
                 location.href = '/allpost'
             
             })
