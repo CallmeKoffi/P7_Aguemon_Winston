@@ -81,6 +81,7 @@ exports.login = (req, res, next) => {
 
 exports.getUserProfile = (req, res, next) => {
     console.log('getUserProfile', req.params.id)
+    //commande mysql
     db.query(`SELECT * FROM user_groupomania.user WHERE id='${req.params.id}'`,
         (error, result, rows) => {
             console.log('error', error)
@@ -91,4 +92,17 @@ exports.getUserProfile = (req, res, next) => {
             return res.status(200).json(result);
         }
     );
+}
+
+exports.deleteUserProfile = (req,res,next)=>{
+    //commande mysql
+    console.log(req);
+    db.query( `DELETE * FROM user_groupomania.user WHERE id='${req.params.id}'`,
+    (error, result, rows) => {
+        if (error) {
+            return res.status(400).json({ error });
+        }
+        return res.status(200).json(result);
+    }
+    )
 }

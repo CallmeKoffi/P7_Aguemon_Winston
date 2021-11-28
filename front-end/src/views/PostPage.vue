@@ -1,19 +1,24 @@
 <template >
 <div class="comment">
-<Post :post="post" :displayBtnComment="false"/>``
+<img alt="Groupomania Logo" src="../assets/icon-left-font-monochrome-black.png">
+    <p>Bienvenue dans votre réseau d'entreprise</p>
+    <nav>
+        <router-link to="/allpost">Home</router-link>
+    </nav>
 <div>
-    
+ <Post :post="post" :displayBtnComment="false"/>   
     
 </div>
 
-<form @submit="(e) => e.preventDefault()">
+<form @submit.prevent = "sendComment">
     <input
-        
+        name="content"
         id="commentcontent"
         type="text"
         placeholder="Commentez ici..."
         
       />
+      <button class="btn_send" type="submit" >envoyer commentaire</button>
 </form>
 
 <Comment v-for="comment in comments" :key="comment.id" :comment="comment"/>
@@ -52,7 +57,7 @@ export default {
     Post,
     Comment,
   },
-  beforeMount(){
+  beforeMount: function(){
        
       fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }`,{
                 method: 'GET'
@@ -60,15 +65,29 @@ export default {
             )
             .then(res => res.json())
             .then(post => {
-                this.post = post[0]
-                })
-            .then(comment =>{
-              this.comment = comment[0]
+                this.post = post[0];
+                fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comments`,{
+                  method: 'GET'
+                }).then(res => res.json())
+                .then(comments =>
+                this.comments = comments
+                )
             })
+          
   },
   method:{
-      deletePost(){
-          
+        sendComment(){
+            const content = document.getElementById("commentcontent");
+            const userId = document.getElementById("userId").value;
+          fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comments`,{
+                method: 'POST',
+                body: JSON.stringify({content,userId}),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+                    
+                }
+            ).then(res => res.json())
       }
   }
  

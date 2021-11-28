@@ -5,9 +5,13 @@
         </router-link> 
         <nav>
             <router-link to='/allpost'>
-                <div class="account">Mon compte</div>
+                <div class="account">Home</div>
             </router-link>
-            <div class="disconnect" @click = disconnect()>Se déconnecter</div>
+            <div>
+               <div class="disconnect" @click = disconnect()>Se déconnecter</div>
+               <div class="disconnect" @click = deleteAccount()>Supprimer son compte</div>
+            </div>
+            
         </nav>
        
         
@@ -17,15 +21,37 @@
 <script>
 export default {
     name:'UserPage',
+    data(){
+        return{
+
+        }
+    },
 
     methods: {
         disconnect() {
             localStorage.removeItem('user');
             location.href="/";
+        },
+         deleteAccount() {
+    
+
+    const userId = JSON.parse(localStorage.getItem("user")).userId;
+    fetch(`http://localhost:3000/api/profile/:id/${userId}`,{
+        method: "GET",
+        body: JSON.stringify({userId}),
+        headers: {
+                    'Content-type': 'application/json'
+                } 
+    })
+    localStorage.clear();
+    //location.href="/Register";
+    
+  }
+            
         }
     }
 
-}
+
 
 
 </script>

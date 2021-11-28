@@ -3,7 +3,7 @@
      <img alt="Groupomania Logo" src="../assets/icon-left-font-monochrome-black.png">
     <p>Bienvenue dans votre réseau d'entreprise</p>
     <nav>
-        <router-link to="/useraccountpage">Mon Compte</router-link>|<router-link to="/homeuser"> Poster</router-link>
+        <router-link to="/useraccountpage">Mon Compte</router-link>|<router-link to="/newpost"> Poster</router-link>
     </nav>
     <div class="card_post">
         <div class="profile">
