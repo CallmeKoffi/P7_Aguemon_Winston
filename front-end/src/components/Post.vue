@@ -55,7 +55,7 @@ export default {
     font-style: italic;
   }
   .card_sm{
-      width: 100%;
+      
       background-color: whitesmoke;
       margin: 30px;
   }
@@ -66,7 +66,7 @@ export default {
   .card_sm-postImg {
     width: 50%;
     height: 50%;
-    border-radius: 40%;
+    
   }
 
   form {

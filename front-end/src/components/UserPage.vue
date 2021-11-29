@@ -43,8 +43,8 @@ export default {
 
     }).then((res)=> {
         console.log(res)
-         //sessionStorage.clear();
-    // location.href="/register";
+        sessionStorage.clear();
+        location.href="/register";
          
     })
    

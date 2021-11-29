@@ -58,7 +58,7 @@ export default {
         },
       }).then((res) => {
         if (res.status === 201) console.log(res);
-        //location.href = '/allpost';
+        location.href = '/allpost';
       });
     },
   

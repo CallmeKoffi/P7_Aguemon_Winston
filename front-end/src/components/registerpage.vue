@@ -55,7 +55,7 @@ export default {
                 
                 .then(res => {
                     if(res.status === 201) {
-                         location.href = '/allpost';
+                         location.href = '/';
                     }
                 })
                 .catch((error) => {
