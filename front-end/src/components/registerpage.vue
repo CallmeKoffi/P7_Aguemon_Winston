@@ -37,7 +37,6 @@ export default {
             message: "",
         };
     },
-
     methods: {
         register(){
             const nom = document.getElementById("registerpage-name").value;
@@ -56,7 +55,7 @@ export default {
                 
                 .then(res => {
                     if(res.status === 201) {
-                         location.href = '/';
+                         location.href = '/allpost';
                     }
                 })
                 .catch((error) => {

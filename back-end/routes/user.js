@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth');
+//const auth = require('../middleware/auth');
 
 const userCtrl = require('../controllers/user');
 
 router.post('/register', userCtrl.register);
 router.post('/login',userCtrl.login);
 router.get('/profile/:id', userCtrl.getUserProfile);
-router.delete('/profile/:id/delete', userCtrl.deleteUserProfile)
+router.delete('/profile/:id/delete', userCtrl.deleteUserProfile);
 
 module.exports = router;
 
