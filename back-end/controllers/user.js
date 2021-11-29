@@ -44,8 +44,7 @@ exports.register = (req, res, next) => {
 
 exports.login = (req, res, next) => {
   //Search users in BDD + injection sql
-  db.query(
-    'SELECT * FROM user_groupomania.user WHERE email=?',
+  db.query('SELECT * FROM user_groupomania.user WHERE email=?',
     [req.body.email],
     (err, results) => {
       console.log(req.body, results);
