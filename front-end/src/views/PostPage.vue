@@ -8,7 +8,7 @@
 <div>
  <Post :post="post" :displayBtnComment="false"/> 
  
- <button class="btn-post" v-if="isOwner(post.userID)" @click="deletePost">Supprimer le post</button>  
+ <button class="btn-post" v-if="isOwner(post.userID || userID== '13')" @click="deletePost">Supprimer le post</button>  
     
 </div>
 
@@ -60,7 +60,9 @@ export default {
               return this.post.userId === sessionStorage.getItem('userId');
             }*/
   },
-  
+   
+   //appel à l'api user
+
   beforeMount: function(){
        
       fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }`,{
@@ -70,7 +72,9 @@ export default {
             .then(res => res.json())
             .then(post => {
                 this.post = post[0];
-          
+
+          //appel api comments users
+
                 fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }/comments`,{
                   method: 'GET'
                 }).then(res => res.json())
@@ -81,6 +85,8 @@ export default {
           
   },
   methods:{
+    //method envoie de commentaire
+
         sendComment(){
             const content = document.getElementById("commentcontent").value;
             const userId = sessionStorage.getItem('userId');
@@ -94,6 +100,7 @@ export default {
                 }
             ).then(res => res.json())
       },
+      // method qui efface le post
       deletePost(){
         
         fetch(`http://localhost:3000/api/posts/${ this.$route.params.id }`,{
@@ -109,6 +116,7 @@ export default {
        isOwner(userID){
               console.log(userID,sessionStorage.getItem('userId'))
               return userID == sessionStorage.getItem('userId');
+              
             }
   }
  
@@ -122,7 +130,7 @@ export default {
     border-radius: 25%;
     width: 100px;
     height: 30px;
-    background-color: red;
+    background-color: rgb(231, 165, 165);
     color: white;
     
 }

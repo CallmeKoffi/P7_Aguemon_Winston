@@ -38,7 +38,7 @@ export default {
 
 <style lang="scss" >
 .card {
-  background-color: rgb(227, 233, 245);
+  background-color: rgb(240, 209, 213);
   border-radius: 20px;
   margin: 10px;
   .card_profile {
