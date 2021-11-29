@@ -5,8 +5,7 @@ require('dotenv').config();
 
 //Inscription
 exports.register = (req, res, next) => {
-  db.query(
-    `SELECT * FROM user_groupomania.user WHERE email = ?`,
+  db.query(`SELECT * FROM user_groupomania.user WHERE email = ?`,
     [req.body.email],
     (err, results) => {
       //Verification mail//
@@ -22,8 +21,7 @@ exports.register = (req, res, next) => {
           .hash(req.body.password, 10)
           .then((cryptedPassword) => {
             //Add to BDD +injection sql
-            db.query(
-              `INSERT INTO user_groupomania.user (nom, prenom, email, password ) VALUES ('${req.body.nom}','${req.body.prenom}','${req.body.email}','${cryptedPassword}')`,
+            db.query(`INSERT INTO user_groupomania.user (nom, prenom, email, password ) VALUES ('${req.body.nom}','${req.body.prenom}','${req.body.email}','${cryptedPassword}')`,
 
               (err, fields) => {
                 if (err) {
@@ -80,8 +78,7 @@ exports.getUserProfile = (req, res, next) => {
 
   //injection sql
 
-  db.query(
-    'SELECT * FROM user_groupomania.user WHERE id=?',
+  db.query('SELECT * FROM user_groupomania.user WHERE id=?',
     [req.params.id],
     (error, result, rows) => {
       console.log('error', error);
@@ -100,8 +97,7 @@ exports.deleteUserProfile = (req, res, next) => {
 
   //injection sql
 
-  db.query(
-    'DELETE FROM user_groupomania.user WHERE id=?',
+  db.query('DELETE FROM user_groupomania.user WHERE id=?',
     [req.params.id],
     (error, result) => {
       if (error) {
